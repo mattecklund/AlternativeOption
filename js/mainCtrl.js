@@ -12,9 +12,9 @@ app.controller('mainCtrl', function($scope, locationSvc, weatherSvc){
 	$scope.getWeather = function(){
 		weatherSvc.getWeather($scope.location).then(function(response){
 				// console.log('the promise was fulfilled with a ' + response.status);
-				// console.log(response);
+				console.log(response);
 				$scope.weather = response.data;
-				$scope.weather.main.temp -= 273;
+				$scope.weather.main.temp = parseFloat(($scope.weather.main.temp - 273.15).toFixed(1));
 				// console.log($scope.weather);
 			},
 			function(response){
@@ -25,11 +25,16 @@ app.controller('mainCtrl', function($scope, locationSvc, weatherSvc){
 	};
 	
 	$scope.getLocation = function(){
-		locationSvc.getLocation(function(location){
-			$scope.location.lat = location.coords.latitude;
-			$scope.location.lon = location.coords.longitude;
-			$scope.getWeather();
-		})
+		locationSvc.getLocation().then(
+				function(location){
+					$scope.location.lat = location.coords.latitude;
+					$scope.location.lon = location.coords.longitude;
+					$scope.getWeather();
+				},
+				function(location){
+					console.log(location);
+				}
+			)
 			
 	}
 
@@ -38,6 +43,12 @@ app.controller('mainCtrl', function($scope, locationSvc, weatherSvc){
 	$scope.getLocation();
 
 });
+
+
+
+
+
+
 
 
 
