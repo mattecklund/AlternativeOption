@@ -10,7 +10,7 @@ app.service('weatherSvc', function($http){
 		// console.log('On Her Majesty\'s Secret Weather Service');
 		return $http({
 			method: 'GET',
-			url: weatherURL + 'lat=' + location.lat + '&lon=' + location.lon
+			url: weatherURL + 'lat=' + location.latitude + '&lon=' + location.longitude
 		});
 	};
 

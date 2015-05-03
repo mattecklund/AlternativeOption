@@ -27,8 +27,6 @@ app.controller('mainCtrl', function($scope, locationSvc, weatherSvc){
 	$scope.getLocation = function(){
 		locationSvc.getLocation().then(
 				function(location){
-					$scope.location.lat = location.coords.latitude;
-					$scope.location.lon = location.coords.longitude;
 					$scope.getWeather();
 				},
 				function(location){

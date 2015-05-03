@@ -5,16 +5,16 @@ app.service('locationSvc', function($http, $q){
 
 	//gets Current 
 	this.getLocation = function(){
-		var dfd = $q.defer();
+		var deferred = $q.defer();
 		navigator.geolocation.getCurrentPosition(function(position){
 				// console.log(position)
-				dfd.resolve(position);
+				deferred.resolve(position);
 			},
 			function(){
 				console.log('navigator.location isn\'t working');
-				dfd.reject('Didn\'t work');
+				deferred.reject('Didn\'t work');
 			})
-		return dfd.promise;
+		return deferred.promise;
 	}
 
 
